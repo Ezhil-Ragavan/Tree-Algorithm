@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+using namespace std;
+//creation of tree elements on class
+class Node
+{
+public:    
+    int key;
+    Node*left,*right;
+};
+//creation of newnode
+Node* newnode(int data)
+{
+    Node* n=new Node();
+    n->key=data;
+    n->left=NULL;
+    n->right=NULL;
+    return n;
+}
+//find the last elements
+int find_last(Node* root)
+{
+    Node*temp=NULL;
+    if(root==NULL)
+    {
+        cout<<"NO elements"<<endl;
+    }
+    else
+    {
+       queue<Node*> a;
+       a.push(root);
+       while(!a.empty())
+       {
+           temp=a.front();
+           a.pop();
+           if(temp->left!=NULL)
+           {
+               a.push(temp->left);
+           }
+           if(temp->right)
+           {
+               a.push(temp->right);   
+           }
+       }
+    }
+    return temp->key;
+}
