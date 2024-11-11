@@ -1,0 +1,55 @@
+#include <bits/stdc++.h>
+using namespace std;
+//creation of tree elements on class
+class Node
+{
+public:    
+    int key;
+    Node*left,*right;
+};
+//creation of newnode
+Node* newnode(int data)
+{
+    Node* n=new Node();
+    n->key=data;
+    n->left=NULL;
+    n->right=NULL;
+    return n;
+}
+//insertion of elements in the tree
+Node* insert(int data,Node*root)
+{
+   Node* m=newnode(data);
+   if(root == NULL)
+   {
+       root=m;
+       cout<<"inserted root"<<endl;
+       return root;
+   }
+   queue<Node*> queue;
+   queue.push(root);
+   Node* front=NULL;
+   while(!queue.empty())
+   {
+       front=queue.front();
+       queue.pop();
+       if(front->left==NULL)
+       {
+           front->left=m;
+           cout<<"Inserted left"<<endl;
+           break;
+       }
+       else if(front->right==NULL)
+       {
+           front->right=m;
+           cout<<"Inserted right"<<endl;
+           break;
+       }
+       else
+       {
+           queue.push(front->left);
+           queue.push(front->right);
+       }
+   }
+   return root;
+}
